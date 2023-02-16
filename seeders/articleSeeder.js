@@ -29,9 +29,15 @@ module.exports = async () => {
     });
   }
 
-  //await User.bulkCreate(users);
-  //await Article.bulkCreate(articles);
-  //await Comment.bulkCreate(comments);
+  users.push({
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: await bcrypt.hash("1234", 8),
+  });
+
+  await User.bulkCreate(users);
+  await Article.bulkCreate(articles);
+  await Comment.bulkCreate(comments);
 
   /*   console.log("[Database] Se corrió el seeder de Articles."); */
 };
