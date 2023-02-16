@@ -24,7 +24,7 @@ Article.initModel(sequelize);
  * mismos (usando métodos como belongsTo, hasMany y belongsToMany)...
  */
 
-User.hasMany(Article);
+User.hasMany(Article, { onDelete: "cascade" });
 User.hasMany(Comment);
 
 Article.hasMany(Comment);

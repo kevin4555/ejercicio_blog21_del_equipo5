@@ -1,8 +1,7 @@
 //Middleware - Info Usuario
-const makeUserAvailableInViews = require("../middlewares/makeUserAvalibleInViews")
+const makeUserAvailableInViews = require("../middlewares/makeUserAvalibleInViews");
 
 const userRoutes = require("./userRoutes");
-const articleRoutes = require("./articleRoutes");
 const commentRoutes = require("./commentRoutes");
 
 /**
@@ -27,10 +26,10 @@ module.exports = (app) => {
    */
 
   //Usamos el middleware en todas las rutas
-  app.use(makeUserAvailableInViews)
+  app.use(makeUserAvailableInViews);
 
   app.use("/usuarios", userRoutes);
-  app.use("/articulos", articleRoutes);
+
   app.use("/comentar", commentRoutes);
 
   app.use("/", publicRoutes);

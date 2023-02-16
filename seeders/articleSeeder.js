@@ -30,7 +30,7 @@ module.exports = async () => {
   }
 
   users.push({
-    username: faker.internet.userName(),
+    username: "pepe",
     email: faker.internet.email(),
     password: await bcrypt.hash("1234", 8),
   });

@@ -16,7 +16,9 @@
     <div class="container">
       <div class="d-flex justify-content-between">
         <div class="col-6"><h1>Articulos del Blog</h1></div>
-        <div class="col-1"><a href="/panel/admin/new" class="btn btn-success">Nuevo</a></div>
+        <div class="col-1">
+          <a href="/panel/admin/articulos/new" class="btn btn-success">Nuevo</a>
+        </div>
       </div>
     </div>
     <div class="container">
@@ -37,8 +39,6 @@
 
           <tbody>
             <%for(let article of articles){%>
-            <!--        default -->
-            <%if (article.user.id === user.id) { %>
             <tr class="align-middle">
               <th><p><%=article.id%></p></th>
               <td>
@@ -73,13 +73,15 @@
               </td>
               <td>
                 <div class="text-center">
-                  <a href="/panel/admin/edit/<%=article.id%>" class="btn btn-primary">Editar</a>
+                  <a href="/panel/admin/articulos/edit/<%=article.id%>" class="btn btn-primary"
+                    >Editar</a
+                  >
                 </div>
                 <div class="text-center pt-5">
                   <!-- prettier-ignore -->
                   <a onclick=<%=`askForDelete(${article.id})`%>
                     type="button"
-                    href="/panel/admin/eliminar/<%=article.id%>"
+                    href="/panel/admin/articulos/eliminar/<%=article.id%>"
                     class="btn btn-danger"
                     name="delete"
                     id="delete"
@@ -88,7 +90,7 @@
                 </div>
               </td>
             </tr>
-            <% } else { null } }%>
+            <% }%>
           </tbody>
         </table>
       </div>

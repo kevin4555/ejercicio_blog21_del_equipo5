@@ -21,7 +21,8 @@ async function show(req, res) {
     ],
     order: [[{ model: Comment }, "updatedAt", "DESC"]],
   });
-  return res.render("articulos", { article, es, format });
+  const author = await article.getAuthor();
+  return res.render("articulos", { article, es, format, author });
 }
 
 // Show the form for creating a new resource
@@ -35,7 +36,7 @@ async function store(req, res) {
     title: req.body.titulo,
     content: req.body.text,
     img: req.body.img,
-    userId: req.user.dataValues.id
+    userId: req.user.dataValues.id,
   });
   return res.redirect("/panel/admin");
 }
@@ -45,14 +46,14 @@ async function edit(req, res) {
   const article = await Article.findByPk(req.params.id, {
     include: {
       model: User,
-    }
+    },
   });
 
   if (req.user.dataValues.id === article.user.id) {
     return res.render("edit", { article });
   } else {
     console.log("No tenes permiso.");
-    return res.redirect("/panel/admin")
+    return res.redirect("/panel/admin");
   }
 }
 
@@ -68,8 +69,8 @@ async function update(req, res) {
     {
       where: {
         id: articleId,
-      }
-    }
+      },
+    },
   );
   return res.redirect("/panel/admin");
 }

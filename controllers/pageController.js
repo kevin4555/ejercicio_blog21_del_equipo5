@@ -9,13 +9,17 @@ async function showHome(req, res) {
 
 async function showAdmin(req, res) {
   if (req.isAuthenticated()) {
-    const articles = await Article.findAll({ include: User, order: [["updatedAt", "DESC"]] });
+    const articles = await Article.findAll({
+      where: { userId: req.user.id },
+      include: User,
+      order: [["updatedAt", "DESC"]],
+    });
+    console.log(articles);
     res.render("admin", { articles, format, es });
   } else {
-    res.render("login")
+    res.render("login");
   }
 }
-
 
 module.exports = {
   showHome,

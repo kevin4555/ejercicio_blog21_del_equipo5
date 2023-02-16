@@ -13,8 +13,8 @@ const login = passport.authenticate("local", {
 
 function logout(req, res) {
   req.logout((err) => {
-    if (err) throw err
-    return res.redirect("/login")
+    if (err) throw err;
+    return res.redirect("/login");
   });
 }
 
@@ -23,7 +23,6 @@ async function register(req, res) {
 }
 
 async function storeUser(req, res) {
-
   if (req.body.password === req.body.confirmpassword) {
     await User.create({
       email: req.body.email,
@@ -31,7 +30,6 @@ async function storeUser(req, res) {
       password: await bcrypt.hash(req.body.password, 8),
     });
     return res.redirect("/");
-
   } else {
     console.log("las contraseñas no coinciden");
     return res.redirect("/register");
