@@ -14,7 +14,6 @@ async function showAdmin(req, res) {
       include: User,
       order: [["updatedAt", "DESC"]],
     });
-    console.log(articles);
     res.render("admin", { articles, format, es });
   } else {
     res.render("login");

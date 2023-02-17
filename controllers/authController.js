@@ -1,20 +1,22 @@
 const passport = require("passport");
+const session= require('express-session')
 const { Article, Comment, User } = require("../models");
 const bcrypt = require("bcryptjs");
 
 async function index(req, res) {
-  res.redirect("/");
+  res.render("login");
 }
 
-const login = passport.authenticate("local", {
-  successRedirect: "/",
+function login(req,res){
+  passport.authenticate("local", {
+  successRedirect: req.session.redirectTo ? req.session.redirectTo: "/",
   failureRedirect: "/login",
-});
+})(req,res);}
 
 function logout(req, res) {
   req.logout((err) => {
     if (err) throw err;
-    return res.redirect("/login");
+    return res.redirect("/");
   });
 }
 
