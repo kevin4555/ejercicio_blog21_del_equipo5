@@ -4,10 +4,11 @@ const express = require("express");
 const router = require("./routes");
 const port = process.env.APP_PORT || 3000;
 const app = express();
-const passportConfig = require("./passport/passportConfig")
+const passportConfig = require("./passport/passportConfig");
 const dbInitialSetup = require("./dbInitialSetup");
 
 ///// Middlewares
+app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 

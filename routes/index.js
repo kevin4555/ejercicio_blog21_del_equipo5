@@ -3,6 +3,7 @@ const makeUserAvailableInViews = require("../middlewares/makeUserAvalibleInViews
 
 const userRoutes = require("./userRoutes");
 const commentRoutes = require("./commentRoutes");
+const apiRoutes = require("./apiRoutes");
 
 /**
  * Otra alternativa podría ser organizar las rutas según su nivel de
@@ -29,6 +30,7 @@ module.exports = (app) => {
   app.use(makeUserAvailableInViews);
 
   app.use("/usuarios", userRoutes);
+  app.use("/api", apiRoutes);
 
   app.use("/comentar", commentRoutes);
 

@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
+const bcrypt = require("bcryptjs");
 
 class User extends Model {
   static initModel(sequelize) {
@@ -29,6 +30,9 @@ class User extends Model {
       },
     );
     return User;
+  }
+  async isValidPassword(password) {
+    return await bcrypt.compare(password, this.password);
   }
 }
 
